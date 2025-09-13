@@ -1,0 +1,8 @@
+[python]
+use_venv = true
+
+[install]
+cache = false
+
+[venv]
+in_project = true

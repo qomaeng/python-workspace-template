@@ -1,0 +1,7 @@
+{
+  "folders": [
+    { "path": "api-server" },
+    { "path": "auth-service" },
+    { "path": "user-service" }
+  ]
+}

@@ -1,0 +1,101 @@
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[project]
+name = "auth-service"
+version = "0.0.1"
+description = "Internal auth service"
+authors = [
+  { name = "qomaeng", email = "qomaeng@gmail.com" }
+]
+readme = "README.md"
+requires-python = "~=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "bandit~=1.8",
+  "black~=25.1",
+  "coverage~=7.10",
+  "pyright~=1.1",
+  "pytest~=8.4",
+  "ruff~=0.13",
+]
+
+[tool.pdm.build]
+package-dir = "src"
+includes = ["auth_service"]
+
+[tool.pdm.scripts]
+format = { composite = [
+  "echo '[1/2] Formatting with Ruff...'",
+  "ruff format .",
+  "echo '[2/2] Formatting with Black...'",
+  "black .",
+] }
+lint = { composite = [
+  "echo '[1/2] Checking formatting (Ruff)...'",
+  "ruff format --check .",
+  "echo '[2/2] Running lint checks (Ruff)...'",
+  "ruff check .",
+] }
+fix = "ruff check --fix ."
+audit = "bandit -c pyproject.toml -r src"
+start = "python -m auth_service"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+typeCheckingMode = "basic"         # "strict"
+reportMissingTypeStubs = "warning"
+pythonVersion = "3.13"
+include = ["src"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+  "E",   # pycodestyle errors
+  "W",   # pycodestyle warnings
+  "A",   # flake8-builtins
+  "S",   # flake8-bandit (security)
+  "SIM", # flake8-simplify
+  "F",   # pyflakes
+  "I",   # isort
+  "B",   # flake8-bugbear
+  "C4",  # flake8-comprehensions
+  "UP",  # pyupgrade
+]
+ignore = [
+  "E203", # whitespace before ':', handled by black
+  "E501", # line too long, handled by black
+  "C901", # too complex
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["auth_service"]
+
+[tool.black]
+line-length = 88
+target-version = ["py313"]
+
+[tool.bandit]
+skips = ["B101"] # assert
+
+[tool.pytest.ini_options]
+addopts = "-ra -q"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+
+[tool.coverage.report]
+show_covered = true
+show_missing = true
+
+[tool.coverage.html]
+show_contexts = true
