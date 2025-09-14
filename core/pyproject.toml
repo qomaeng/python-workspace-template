@@ -1,0 +1,104 @@
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[project]
+name = "core"
+version = "0.0.1"
+description = "Core library"
+authors = [
+  { name = "qomaeng", email = "qomaeng@gmail.com" }
+]
+readme = "README.md"
+requires-python = "~=3.13"
+dependencies = ["pydantic>=2.11.9"]
+
+[dependency-groups]
+dev = [
+  "bandit~=1.8",
+  "black~=25.1",
+  "coverage~=7.10",
+  "pyright~=1.1",
+  "pytest~=8.4",
+  "ruff~=0.13",
+]
+
+[tool.pdm.build]
+package-dir = "."
+includes = ["core"]
+
+[tool.pdm.scripts]
+format = { composite = [
+  "echo '[1/2] Formatting with Ruff...'",
+  "ruff format .",
+  "echo '[2/2] Formatting with Black...'",
+  "black .",
+] }
+lint = { composite = [
+  "echo '[1/2] Checking formatting (Ruff)...'",
+  "ruff format --check .",
+  "echo '[2/2] Running lint checks (Ruff)...'",
+  "ruff check .",
+] }
+fix = "ruff check --fix ."
+audit = "bandit -c pyproject.toml -r core"
+pyright = "pyright --project pyproject.toml"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+pythonVersion = "3.13"
+autoSearchPaths = false
+typeCheckingMode = "strict"
+reportMissingImports = "error"
+reportUnusedImport = "error"
+reportUnusedVariable = "error"
+include = ["core"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+  "E",   # pycodestyle errors
+  "W",   # pycodestyle warnings
+  "A",   # flake8-builtins
+  "S",   # flake8-bandit (security)
+  "SIM", # flake8-simplify
+  "F",   # pyflakes
+  "I",   # isort
+  "B",   # flake8-bugbear
+  "C4",  # flake8-comprehensions
+  "UP",  # pyupgrade
+]
+ignore = [
+  "E203", # whitespace before ':', handled by black
+  "E501", # line too long, handled by black
+  "C901", # too complex
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["core"]
+
+[tool.black]
+line-length = 88
+target-version = ["py313"]
+
+[tool.bandit]
+skips = ["B101"] # assert
+
+[tool.pytest.ini_options]
+addopts = "-ra -q"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["core"]
+
+[tool.coverage.report]
+show_covered = true
+show_missing = true
+
+[tool.coverage.html]
+show_contexts = true

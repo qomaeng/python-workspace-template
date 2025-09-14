@@ -1,0 +1,7 @@
+__all__ = [
+    "USER_NAME_MIN_LENGTH",
+    "USER_NAME_MAX_LENGTH",
+]
+
+USER_NAME_MIN_LENGTH: int = 2
+USER_NAME_MAX_LENGTH: int = 32
