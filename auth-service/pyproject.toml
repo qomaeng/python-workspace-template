@@ -24,7 +24,7 @@ dev = [
 ]
 
 [tool.pdm.build]
-package-dir = "src"
+package-dir = "."
 includes = ["auth_service"]
 
 [tool.pdm.scripts]
@@ -41,7 +41,7 @@ lint = { composite = [
   "ruff check .",
 ] }
 fix = "ruff check --fix ."
-audit = "bandit -c pyproject.toml -r src"
+audit = "bandit -c pyproject.toml -r auth_service"
 start = "python -m auth_service"
 
 [tool.pyright]
@@ -50,7 +50,7 @@ venv = ".venv"
 typeCheckingMode = "basic"         # "strict"
 reportMissingTypeStubs = "warning"
 pythonVersion = "3.13"
-include = ["src"]
+include = ["auth_service"]
 
 [tool.ruff]
 line-length = 88
@@ -91,7 +91,7 @@ testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true
-source = ["src"]
+source = ["auth_service"]
 
 [tool.coverage.report]
 show_covered = true

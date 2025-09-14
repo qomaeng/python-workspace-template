@@ -27,7 +27,7 @@ dev = [
 ]
 
 [tool.pdm.build]
-package-dir = "src"
+package-dir = "."
 includes = ["api_server"]
 
 [tool.pdm.scripts]
@@ -44,7 +44,7 @@ lint = { composite = [
   "ruff check .",
 ] }
 fix = "ruff check --fix ."
-audit = "bandit -c pyproject.toml -r src"
+audit = "bandit -c pyproject.toml -r api_server"
 dev = "uvicorn --host localhost --port 3000 api_server.app:app --reload"
 start = "uvicorn --host 0.0.0.0 --port 3000 api_server.app:app"
 
@@ -54,7 +54,7 @@ venv = ".venv"
 typeCheckingMode = "basic"         # "strict"
 reportMissingTypeStubs = "warning"
 pythonVersion = "3.13"
-include = ["src"]
+include = ["api_server"]
 
 [tool.ruff]
 line-length = 88
@@ -95,7 +95,7 @@ testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true
-source = ["src"]
+source = ["api_server"]
 
 [tool.coverage.report]
 show_covered = true
