@@ -42,14 +42,18 @@ lint = { composite = [
 ] }
 fix = "ruff check --fix ."
 audit = "bandit -c pyproject.toml -r user_service"
+pyright = "pyright --project pyproject.toml"
 start = "python -m user_service"
 
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
-typeCheckingMode = "basic"         # "strict"
-reportMissingTypeStubs = "warning"
 pythonVersion = "3.13"
+autoSearchPaths = false
+typeCheckingMode = "strict"
+reportMissingImports = "error"
+reportUnusedImport = "error"
+reportUnusedVariable = "error"
 include = ["user_service"]
 
 [tool.ruff]

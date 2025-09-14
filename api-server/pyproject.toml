@@ -45,15 +45,19 @@ lint = { composite = [
 ] }
 fix = "ruff check --fix ."
 audit = "bandit -c pyproject.toml -r api_server"
+pyright = "pyright --project pyproject.toml"
 dev = "uvicorn --host localhost --port 3000 api_server.app:app --reload"
 start = "uvicorn --host 0.0.0.0 --port 3000 api_server.app:app"
 
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
-typeCheckingMode = "basic"         # "strict"
-reportMissingTypeStubs = "warning"
 pythonVersion = "3.13"
+autoSearchPaths = false
+typeCheckingMode = "strict"
+reportMissingImports = "error"
+reportUnusedImport = "error"
+reportUnusedVariable = "error"
 include = ["api_server"]
 
 [tool.ruff]
