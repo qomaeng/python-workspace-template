@@ -1,8 +1,0 @@
-{
-  "folders": [
-    { "path": "api-server" },
-    { "path": "auth-service" },
-    { "path": "core" },
-    { "path": "user-service" }
-  ]
-}
