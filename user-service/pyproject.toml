@@ -19,17 +19,6 @@ dependencies = [
 module-root = "."
 source-include = ["user_service/**"]
 
-[tool.pyright]
-venvPath = "."
-venv = ".venv"
-pythonVersion = "3.13"
-autoSearchPaths = false
-typeCheckingMode = "strict"
-reportMissingImports = "error"
-reportUnusedImport = "error"
-reportUnusedVariable = "error"
-include = ["user_service"]
-
 [tool.ruff]
 line-length = 88
 target-version = "py313"

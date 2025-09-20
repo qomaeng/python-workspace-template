@@ -20,17 +20,6 @@ dependencies = [
 module-root = "."
 source-include = ["core/**"]
 
-[tool.pyright]
-venvPath = "."
-venv = ".venv"
-pythonVersion = "3.13"
-autoSearchPaths = false
-typeCheckingMode = "strict"
-reportMissingImports = "error"
-reportUnusedImport = "error"
-reportUnusedVariable = "error"
-include = ["core"]
-
 [tool.ruff]
 line-length = 88
 target-version = "py313"

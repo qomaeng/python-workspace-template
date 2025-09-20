@@ -1,0 +1,21 @@
+{
+  "include": [
+    "api-server",
+    "auth-service",
+    "core",
+    "user-service"
+  ],
+  "exclude": ["**/docs", "**/scripts", "**/tests"],
+  "executionEnvironments": [
+    { "root": "api-server", "extraPaths": ["core"] },
+    { "root": "auth-service", "extraPaths": ["core"] },
+    { "root": "user-service", "extraPaths": ["core"] }
+  ],
+
+  "pythonVersion": "3.13",
+
+  "typeCheckingMode": "strict",
+  "reportMissingImports": "error",
+  "reportUnusedImport": "error",
+  "reportUnusedVariable": "error"
+}
