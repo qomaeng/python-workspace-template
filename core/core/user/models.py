@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field
 
 from core.common.common_types import AwareDatetime
 
-from .user_types import UserId, UserName
+from .types import UserId, UserName
 
 __all__ = [
     "User",
