@@ -1,6 +1,6 @@
 [build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
+requires = ["uv_build"]
+build-backend = "uv_build"
 
 [project]
 name = "user-service"
@@ -10,40 +10,14 @@ authors = [
   { name = "qomaeng", email = "qomaeng@gmail.com" }
 ]
 readme = "README.md"
-requires-python = "~=3.13"
-dependencies = []
-
-[dependency-groups]
-dev = [
-  "bandit~=1.8",
-  "black~=25.1",
-  "coverage~=7.10",
-  "pyright~=1.1",
-  "pytest~=8.4",
-  "ruff~=0.13",
+requires-python = ">=3.13"
+dependencies = [
+  "core>=0.0.1",
 ]
 
-[tool.pdm.build]
-package-dir = "."
-includes = ["user_service"]
-
-[tool.pdm.scripts]
-format = { composite = [
-  "echo '[1/2] Formatting with Ruff...'",
-  "ruff format .",
-  "echo '[2/2] Formatting with Black...'",
-  "black .",
-] }
-lint = { composite = [
-  "echo '[1/2] Checking formatting (Ruff)...'",
-  "ruff format --check .",
-  "echo '[2/2] Running lint checks (Ruff)...'",
-  "ruff check .",
-] }
-fix = "ruff check --fix ."
-audit = "bandit -c pyproject.toml -r user_service"
-pyright = "pyright --project pyproject.toml"
-start = "python -m user_service"
+[tool.uv.build-backend]
+module-root = "."
+source-include = ["user_service/**"]
 
 [tool.pyright]
 venvPath = "."
@@ -80,7 +54,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["user_service"]
+known-first-party = ["user_service", "core"]
 
 [tool.black]
 line-length = 88

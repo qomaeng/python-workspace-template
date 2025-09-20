@@ -5,17 +5,23 @@
 - Install (package, dependencies)
 
 ```bash
-$ pdm install -p PROJECT_PATH -G :all
+$ uv sync --all-packages [--group dev]
 ```
 
 - Start
 
 ```bash
-$ pdm run -p PROJECT_PATH start
+$ uv run --package <PACKAGE> <COMMAND>
 ```
 
 - lint/fix/format
 
 ```bash
-$ pdm run -p PROJECT_PATH <lint|fix|format>
+$ uv run ruff check <PACKAGE_DIR>
+$ uv run ruff format --check <PACKAGE_DIR>
+
+$ uv run ruff check -fix <PACKAGE_DIR>
+
+$ uv run ruff format <PACKAGE_DIR>
+$ uv run black <PACKAGE_DIR>
 ```

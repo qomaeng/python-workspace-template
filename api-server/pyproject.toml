@@ -1,6 +1,6 @@
 [build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
+requires = ["uv_build"]
+build-backend = "uv_build"
 
 [project]
 name = "api-server"
@@ -10,44 +10,16 @@ authors = [
   { name = "qomaeng", email = "qomaeng@gmail.com" }
 ]
 readme = "README.md"
-requires-python = "~=3.13"
+requires-python = ">=3.13"
 dependencies = [
-  "fastapi~=0.116.1",
-  "uvicorn[standard]~=0.35.0",
+  "core>=0.0.1",
+  "fastapi>=0.116.1",
+  "uvicorn[standard]>=0.35.0",
 ]
 
-[dependency-groups]
-dev = [
-  "bandit~=1.8",
-  "black~=25.1",
-  "coverage~=7.10",
-  "pyright~=1.1",
-  "pytest~=8.4",
-  "ruff~=0.13",
-]
-
-[tool.pdm.build]
-package-dir = "."
-includes = ["api_server"]
-
-[tool.pdm.scripts]
-format = { composite = [
-  "echo '[1/2] Formatting with Ruff...'",
-  "ruff format .",
-  "echo '[2/2] Formatting with Black...'",
-  "black .",
-] }
-lint = { composite = [
-  "echo '[1/2] Checking formatting (Ruff)...'",
-  "ruff format --check .",
-  "echo '[2/2] Running lint checks (Ruff)...'",
-  "ruff check .",
-] }
-fix = "ruff check --fix ."
-audit = "bandit -c pyproject.toml -r api_server"
-pyright = "pyright --project pyproject.toml"
-dev = "uvicorn --host localhost --port 3000 api_server.app:app --reload"
-start = "uvicorn --host 0.0.0.0 --port 3000 api_server.app:app"
+[tool.uv.build-backend]
+module-root = "."
+source-include = ["api_server/**"]
 
 [tool.pyright]
 venvPath = "."
@@ -84,7 +56,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["api_server"]
+known-first-party = ["api_server", "core"]
 
 [tool.black]
 line-length = 88

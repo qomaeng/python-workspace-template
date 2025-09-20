@@ -13,8 +13,7 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .pytest_cache/
-.pdm-build/
-.pdm-python
+.uv/
 
 # env
 env

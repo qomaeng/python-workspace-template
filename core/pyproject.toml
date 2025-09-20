@@ -1,6 +1,6 @@
 [build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
+requires = ["uv_build"]
+build-backend = "uv_build"
 
 [project]
 name = "core"
@@ -10,39 +10,15 @@ authors = [
   { name = "qomaeng", email = "qomaeng@gmail.com" }
 ]
 readme = "README.md"
-requires-python = "~=3.13"
-dependencies = ["pydantic>=2.11.9"]
-
-[dependency-groups]
-dev = [
-  "bandit~=1.8",
-  "black~=25.1",
-  "coverage~=7.10",
-  "pyright~=1.1",
-  "pytest~=8.4",
-  "ruff~=0.13",
+requires-python = ">=3.13"
+dependencies = [
+  "core>=0.0.1",
+  "pydantic>=2.11.9",
 ]
 
-[tool.pdm.build]
-package-dir = "."
-includes = ["core"]
-
-[tool.pdm.scripts]
-format = { composite = [
-  "echo '[1/2] Formatting with Ruff...'",
-  "ruff format .",
-  "echo '[2/2] Formatting with Black...'",
-  "black .",
-] }
-lint = { composite = [
-  "echo '[1/2] Checking formatting (Ruff)...'",
-  "ruff format --check .",
-  "echo '[2/2] Running lint checks (Ruff)...'",
-  "ruff check .",
-] }
-fix = "ruff check --fix ."
-audit = "bandit -c pyproject.toml -r core"
-pyright = "pyright --project pyproject.toml"
+[tool.uv.build-backend]
+module-root = "."
+source-include = ["core/**"]
 
 [tool.pyright]
 venvPath = "."

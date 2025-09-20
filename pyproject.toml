@@ -1,0 +1,29 @@
+[project]
+name = "workspace"
+version = "0.0.1"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "bandit>=1.8",
+  "black>=25.1",
+  "coverage>=7.10",
+  "pyright>=1.1",
+  "pytest>=8.4",
+  "ruff>=0.13",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = [
+    "core",
+    "api-server",
+    "auth-service",
+    "user-service",
+]
+
+[tool.uv.sources]
+core = { workspace = true }
