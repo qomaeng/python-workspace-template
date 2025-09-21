@@ -6,12 +6,11 @@ dependencies = []
 
 [dependency-groups]
 dev = [
-  "bandit>=1.8",
-  "black>=25.1",
-  "coverage>=7.10",
-  "pyright>=1.1",
-  "pytest>=8.4",
-  "ruff>=0.13",
+  "black>=25.9.0",
+  "coverage>=7.10.6",
+  "pyright>=1.1.405",
+  "pytest>=8.4.2",
+  "ruff>=0.13.1",
 ]
 
 [tool.uv]
@@ -23,4 +22,54 @@ members = ["core", "api-server", "auth-service", "user-service"]
 [tool.uv.sources]
 core = { workspace = true }
 
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+  "E",   # pycodestyle errors
+  "W",   # pycodestyle warnings
+  "A",   # flake8-builtins
+  "S",   # flake8-bandit (security)
+  "SIM", # flake8-simplify
+  "F",   # pyflakes
+  "I",   # isort
+  "B",   # flake8-bugbear
+  "C4",  # flake8-comprehensions
+  "UP",  # pyupgrade
 ]
+ignore = [
+  # "E203", # whitespace before ':', handled by black
+  "E501", # line too long, handled by black
+  "S101", # assert
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py313"]
+
+[tool.pytest.ini_options]
+addopts = "-ra -q"
+testpaths = [
+  "core/tests",
+  "api-server/tests",
+  "auth-service/tests",
+  "user-service/tests",
+]
+
+[tool.coverage.run]
+branch = true
+source = [
+  "core/core",
+  "api-server/api_server",
+  "auth-service/auth_service",
+  "user-service/user_service",
+]
+
+[tool.coverage.report]
+omit = ["**/tests/**", "**/docs/**", "**/scripts/**"]
+show_missing = true
+
+[tool.coverage.html]
+show_contexts = true

@@ -21,53 +21,6 @@ dependencies = [
 module-root = "."
 source-include = ["api_server/**"]
 
-[tool.ruff]
-line-length = 88
-target-version = "py313"
-
-[tool.ruff.lint]
-select = [
-  "E",   # pycodestyle errors
-  "W",   # pycodestyle warnings
-  "A",   # flake8-builtins
-  "S",   # flake8-bandit (security)
-  "SIM", # flake8-simplify
-  "F",   # pyflakes
-  "I",   # isort
-  "B",   # flake8-bugbear
-  "C4",  # flake8-comprehensions
-  "UP",  # pyupgrade
-]
-ignore = [
-  "E203", # whitespace before ':', handled by black
-  "E501", # line too long, handled by black
-  "C901", # too complex
-]
-
-[tool.ruff.lint.isort]
-known-first-party = ["api_server", "core"]
-
-[tool.black]
-line-length = 88
-target-version = ["py313"]
-
-[tool.bandit]
-skips = ["B101"] # assert
-
-[tool.pytest.ini_options]
-addopts = "-ra -q"
-testpaths = ["tests"]
-
-[tool.coverage.run]
-branch = true
-source = ["api_server"]
-
-[tool.coverage.report]
-show_covered = true
-show_missing = true
-
-[tool.coverage.html]
-show_contexts = true
 [tool.pyright]
 include = ["."]
 exclude = ["**/tests", "**/docs", "**/scripts"]
