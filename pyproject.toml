@@ -23,15 +23,4 @@ members = ["core", "api-server", "auth-service", "user-service"]
 [tool.uv.sources]
 core = { workspace = true }
 
-[tool.pyright]
-include = ["core", "api-server", "auth-service", "user-service"]
-exclude = ["**/docs", "**/scripts", "**/tests"]
-executionEnvironments = [
-  { root = "api-server", extraPaths = ["core"] },
-  { root = "auth-service", extraPaths = ["core"] },
-  { root = "user-service", extraPaths = ["core"] },
 ]
-pythonVersion = "3.13"
-venvPath = "."
-venv = ".venv"
-typeCheckingMode = "strict"
