@@ -7,13 +7,17 @@
 
 # Python
 .py[cod]
-__pycache__/
 .venv/
+__pycache__/
 .mypy_cache/
 .pytest_cache/
 .ruff_cache/
 .pytest_cache/
 .uv/
+
+# Test/Coverage
+htmlcov/
+.coverage
 
 # env
 env
