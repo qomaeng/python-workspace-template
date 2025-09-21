@@ -5,7 +5,7 @@
 - Install (package, dependencies)
 
 ```bash
-$ uv sync --all-packages [--group dev]
+$ uv sync --all-packages [--dev] [--refresh]
 ```
 
 - Start

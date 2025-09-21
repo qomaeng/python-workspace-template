@@ -17,14 +17,20 @@ dev = [
 package = false
 
 [tool.uv.workspace]
-members = ["core", "api-server", "auth-service", "user-service"]
+members = ["packages/*"]
 
 [tool.uv.sources]
 core = { workspace = true }
 
 [tool.ruff]
-line-length = 88
+include = [
+  "pyproject.toml",
+  "packages/*/pyproject.toml",
+  "packages/*/{src,tests}/**/*.{py,pyi}",
+]
+extend-exclude = ["**/.*"]
 target-version = "py313"
+line-length = 88
 
 [tool.ruff.lint]
 select = [
@@ -40,35 +46,40 @@ select = [
   "UP",  # pyupgrade
 ]
 ignore = [
-  # "E203", # whitespace before ':', handled by black
   "E501", # line too long, handled by black
   "S101", # assert
 ]
 
 [tool.black]
-line-length = 88
+include = '^/packages/[^/]+/(src|tests)/.*\.pyi?$'
+extend-exclude = '''
+(
+  /\.[^/]+
+)
+'''
 target-version = ["py313"]
+line-length = 88
 
 [tool.pytest.ini_options]
-addopts = "-ra -q"
 testpaths = [
-  "core/tests",
-  "api-server/tests",
-  "auth-service/tests",
-  "user-service/tests",
+  "packages/core/tests",
+  "packages/api-server/tests",
+  "packages/auth-service/tests",
+  "packages/user-service/tests",
 ]
+addopts = "-ra -q"
 
 [tool.coverage.run]
-branch = true
 source = [
-  "core/core",
-  "api-server/api_server",
-  "auth-service/auth_service",
-  "user-service/user_service",
+  "packages/core/src",
+  "packages/api-server/src",
+  "packages/auth-service/src",
+  "packages/user-service/src",
 ]
+branch = true
 
 [tool.coverage.report]
-omit = ["**/tests/**", "**/docs/**", "**/scripts/**"]
+omit = ["**/.*"]
 show_missing = true
 
 [tool.coverage.html]

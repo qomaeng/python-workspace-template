@@ -6,9 +6,7 @@ build-backend = "uv_build"
 name = "auth-service"
 version = "0.0.1"
 description = "Internal auth service"
-authors = [
-  { name = "qomaeng", email = "qomaeng@gmail.com" }
-]
+authors = [{ name = "qomaeng", email = "qomaeng@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -16,14 +14,13 @@ dependencies = [
 ]
 
 [tool.uv.build-backend]
-module-root = "."
-source-include = ["auth_service/**"]
+module-root = "src"
 
 [tool.pyright]
-include = ["."]
-exclude = ["**/tests", "**/docs", "**/scripts"]
-extraPaths = ["../core"]
+include = ["src", "tests"]
+exclude = ["**/.*", "**/__pycache__"]
+extraPaths = ["../core/src"]
 pythonVersion = "3.13"
-venvPath = "../"
+venvPath = "../../"
 venv = ".venv"
 typeCheckingMode = "strict"
