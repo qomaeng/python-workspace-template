@@ -25,3 +25,6 @@ pythonVersion = "3.13"
 venvPath = "../../"
 venv = ".venv"
 typeCheckingMode = "strict"
+
+[[tool.pyright.executionEnvironments]]
+root = "src"
