@@ -15,14 +15,3 @@ build-backend = "uv_build"
 
 [tool.uv.build-backend]
 module-root = "src"
-
-[tool.pyright]
-include = ["src", "tests"]
-exclude = ["**/.*", "**/__pycache__"]
-pythonVersion = "3.14"
-venvPath = "../../"
-venv = ".venv"
-typeCheckingMode = "standard"
-
-[[tool.pyright.executionEnvironments]]
-root = "src"
