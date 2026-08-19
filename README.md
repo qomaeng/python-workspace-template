@@ -26,7 +26,6 @@ $ uv run ruff check -fix <PACKAGE_DIR>
 
 # Format
 $ uv run ruff format <PACKAGE_DIR>
-$ uv run black <PACKAGE_DIR>
 ```
 
 - test/coverage

@@ -6,7 +6,7 @@ authors = [{ name = "qomaeng", email = "qomaeng@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
-  "pydantic>=2.11.9",
+  "pydantic>=2.13.4",
 ]
 
 [build-system]
@@ -22,4 +22,7 @@ exclude = ["**/.*", "**/__pycache__"]
 pythonVersion = "3.14"
 venvPath = "../../"
 venv = ".venv"
-typeCheckingMode = "strict"
+typeCheckingMode = "standard"
+
+[[tool.pyright.executionEnvironments]]
+root = "src"

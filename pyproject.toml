@@ -6,11 +6,8 @@ dependencies = []
 
 [dependency-groups]
 dev = [
-  "black>=25.9.0",
-  "coverage>=7.10.6",
-  "pyright>=1.1.405",
-  "pytest>=8.4.2",
-  "ruff>=0.13.1",
+  "coverage>=7.15.4",
+  "pytest>=9.1.1",
 ]
 
 [tool.uv]
@@ -34,31 +31,66 @@ line-length = 120
 
 [tool.ruff.lint]
 select = [
-  "E",   # pycodestyle errors
-  "W",   # pycodestyle warnings
-  "A",   # flake8-builtins
-  "S",   # flake8-bandit (security)
-  "SIM", # flake8-simplify
-  "F",   # pyflakes
-  "I",   # isort
-  "B",   # flake8-bugbear
-  "C4",  # flake8-comprehensions
-  "UP",  # pyupgrade
-]
-ignore = [
-  "E501", # line too long, handled by black
-  "S101", # assert
+  "ERA",   # eradicate
+  "FAST",  # fastapi
+  "ANN",   # flake8-annotations
+  "ASYNC", # flake8-async
+  "S",     # flake8-bandit (security)
+  "B",     # flake8-bugbear
+  "A",     # flake8-builtins
+  "C4",    # flake8-comprehensions
+  "DTZ",   # flake8-datetimez
+  "T10",   # flake8-debugger
+  "EM",    # flake8-errmsg
+  "EXE",   # flake8-executable
+  "ISC",   # flake8-implicit-str-concat
+  "LOG",   # flake8-logging
+  "G",     # flake8-logging-format
+  "PIE",   # flake8-pie
+  "T20",   # flake8-print
+  "PYI",   # flake8-pyi
+  "PT",    # flake8-pytest-style
+  "Q",     # flake8-quotes
+  "RSE",   # flake8-raise
+  "RET",   # flake8-return
+  "SLF",   # flake8-self
+  "SIM",   # flake8-simplify
+  "SLOT",  # flake8-slots
+  "TID",   # flake8-tidy-imports
+  "TD",    # flake8-todos
+  "TC",    # flake8-type-checking
+  "ARG",   # flake8-unused-arguments
+  "PTH",   # flake8-use-pathlib
+  "FLY",   # flynt
+  "I",     # isort
+  "NPY",   # numpy-specific rules
+  "PD",    # pandas-vet
+  "N",     # pep8-naming
+  "PERF",  # perflint
+  "E",     # pycodestyle errors
+  "W",     # pycodestyle warnings
+  "F",     # pyflakes
+  "PGH",   # pygrep-hooks
+  "PL",    # pylint
+  "UP",    # pyupgrade
+  "FURB",  # refurb
+  "RUF",   # ruff-specifc rules
+  "TRY",   # tryceratops
 ]
 
-[tool.black]
-include = '^/packages/[^/]+/(src|tests)/.*\.pyi?$'
-extend-exclude = '''
-(
-  /\.[^/]+
-)
-'''
-target-version = ["py313"]
-line-length = 88
+ignore = [
+  "ANN401", # any-type
+  "B008",   # function-call-in-default-argument
+  "EM101",  # raw-string-in-exception
+  "EM102",  # f-string-in-exception
+  "TD002",  # missing-todo-author
+  "TD003",  # missing-todo-link
+  "ARG001", # unused-function-argument
+  "ARG002", # unused-method-argument
+  "ARG004", # unused-static-method-argument
+  "E501",   # line-too-long
+  "TRY003", # raise-vanilla-args
+]
 
 [tool.pytest.ini_options]
 testpaths = [
