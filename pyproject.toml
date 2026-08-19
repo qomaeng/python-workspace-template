@@ -1,7 +1,7 @@
 [project]
 name = "workspace"
 version = "0.0.1"
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 dependencies = []
 
 [dependency-groups]
@@ -29,8 +29,8 @@ include = [
   "packages/*/{src,tests}/**/*.{py,pyi}",
 ]
 extend-exclude = ["**/.*"]
-target-version = "py313"
-line-length = 88
+target-version = "py314"
+line-length = 120
 
 [tool.ruff.lint]
 select = [
