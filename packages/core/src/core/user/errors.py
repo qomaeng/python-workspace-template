@@ -1,16 +1,18 @@
-from collections.abc import Mapping
 from enum import auto, unique
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from core.common.common_errors import CoreError
-from core.common.common_types import UpperStrEnum
+from core.common.errors import CoreError
+from core.common.types import UpperStrEnum
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 __all__ = [
-    "UserErrorCodes",
-    "UserError",
-    "NotFoundUserError",
-    "DuplicateUserError",
     "DeletedUserError",
+    "DuplicateUserError",
+    "NotFoundUserError",
+    "UserError",
+    "UserErrorCodes",
 ]
 
 
@@ -28,7 +30,7 @@ class UserError(CoreError):
         *,
         code: UserErrorCodes,
         context: Mapping[str, Any] | None = None,
-    ):
+    ) -> None:
         super().__init__(message, code=code, context=context)
 
 
@@ -38,7 +40,7 @@ class NotFoundUserError(UserError):
         message: str = "Not found user",
         *,
         context: Mapping[str, Any] | None = None,
-    ):
+    ) -> None:
         super().__init__(message, code=UserErrorCodes.NOT_FOUND_USER, context=context)
 
 
@@ -48,7 +50,7 @@ class DuplicateUserError(UserError):
         message: str = "Duplicate user",
         *,
         context: Mapping[str, Any] | None = None,
-    ):
+    ) -> None:
         super().__init__(message, code=UserErrorCodes.DUPLICATE_USER, context=context)
 
 
@@ -58,5 +60,5 @@ class DeletedUserError(UserError):
         message: str = "Deleted user",
         *,
         context: Mapping[str, Any] | None = None,
-    ):
+    ) -> None:
         super().__init__(message, code=UserErrorCodes.DELETED_USER, context=context)

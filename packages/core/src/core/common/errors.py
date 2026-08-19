@@ -1,13 +1,15 @@
-from collections.abc import Mapping
 from enum import auto, unique
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from .common_types import UpperStrEnum
+from .types import UpperStrEnum
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 __all__ = [
-    "CoreError",
-    "CommonErrorCodes",
     "CommonError",
+    "CommonErrorCodes",
+    "CoreError",
     "UnknownError",
     "ValidationError",
 ]
@@ -20,7 +22,7 @@ class CoreError(Exception):
         *,
         code: str,
         context: Mapping[str, Any] | None = None,
-    ):
+    ) -> None:
         super().__init__(message)
         self.message = message
         self.code = code
@@ -44,7 +46,7 @@ class CommonError(CoreError):
         *,
         code: CommonErrorCodes,
         context: Mapping[str, Any] | None = None,
-    ):
+    ) -> None:
         super().__init__(message, code=code, context=context)
 
 
@@ -54,7 +56,7 @@ class UnknownError(CommonError):
         message: str = "Unknown error",
         *,
         context: Mapping[str, Any] | None = None,
-    ):
+    ) -> None:
         super().__init__(message, code=CommonErrorCodes.UNKNOWN, context=context)
 
 
@@ -64,5 +66,5 @@ class ValidationError(CommonError):
         message: str = "Validation failed",
         *,
         context: Mapping[str, Any] | None = None,
-    ):
+    ) -> None:
         super().__init__(message, code=CommonErrorCodes.VALIDATION, context=context)

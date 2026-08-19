@@ -1,13 +1,13 @@
 from enum import StrEnum
 from typing import Annotated, Self
 
-from pydantic import UUID4 as PydanticUUID4
-from pydantic import UUID7 as PydanticUUID7
+from pydantic import UUID4 as PYDANTIC_UUID4
+from pydantic import UUID7 as PYDANTIC_UUID7
 from pydantic import AwareDatetime as PydanticAwareDatetime
 from pydantic import Field
 from pydantic import NaiveDatetime as PydanticNaiveDatetime
 
-from .common_constants import (
+from .constants import (
     INT32_MAX,
     INT32_MIN,
     INT64_MAX,
@@ -19,16 +19,16 @@ from .common_constants import (
 )
 
 __all__ = [
-    "Int32",
-    "Int64",
-    "UInt32",
-    "UInt64",
     "ID32",
     "ID64",
     "UUID4",
     "UUID7",
     "AwareDatetime",
+    "Int32",
+    "Int64",
     "NaiveDatetime",
+    "UInt32",
+    "UInt64",
     "UpperStrEnum",
 ]
 
@@ -41,8 +41,8 @@ type UInt64 = Annotated[int, Field(ge=UINT64_MIN, le=UINT64_MAX)]
 type ID32 = Annotated[int, Field(ge=1, le=INT32_MAX)]
 type ID64 = Annotated[int, Field(ge=1, le=INT64_MAX)]
 
-type UUID4 = PydanticUUID4
-type UUID7 = PydanticUUID7
+type UUID4 = PYDANTIC_UUID4
+type UUID7 = PYDANTIC_UUID7
 
 type AwareDatetime = PydanticAwareDatetime
 type NaiveDatetime = PydanticNaiveDatetime

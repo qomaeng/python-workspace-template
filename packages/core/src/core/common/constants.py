@@ -1,12 +1,12 @@
 __all__ = [
-    "INT32_MIN",
     "INT32_MAX",
-    "INT64_MIN",
+    "INT32_MIN",
     "INT64_MAX",
-    "UINT32_MIN",
+    "INT64_MIN",
     "UINT32_MAX",
-    "UINT64_MIN",
+    "UINT32_MIN",
     "UINT64_MAX",
+    "UINT64_MIN",
 ]
 
 INT32_MIN: int = -(2 ** (32 - 1))

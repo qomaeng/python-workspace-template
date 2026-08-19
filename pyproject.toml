@@ -19,6 +19,12 @@ members = ["packages/*"]
 [tool.uv.sources]
 core = { workspace = true }
 
+[tool.pyright]
+include = ["packages"]
+exclude = ["**/.*", "**/__pycache__"]
+pythonVersion = "3.14"
+typeCheckingMode = "standard"
+
 [tool.ruff]
 include = [
   "pyproject.toml",

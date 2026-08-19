@@ -1,10 +1,11 @@
-from typing import Annotated
+from typing import TYPE_CHECKING, Annotated
 
 from pydantic import BaseModel, Field
 
-from core.common.common_types import AwareDatetime
+if TYPE_CHECKING:
+    from core.common.types import AwareDatetime
 
-from .types import UserId, UserName
+    from .types import UserId, UserName
 
 __all__ = [
     "User",
