@@ -6,21 +6,39 @@ dependencies = []
 
 [dependency-groups]
 dev = [
-  "coverage>=7.15.4",
-  "pytest>=9.1.1",
+  "coverage",
+  "pytest",
+  "pytest-asyncio",
 ]
 
 [tool.uv]
 package = false
+build-constraint-dependencies = ["uv_build>=0.12,<0.13"]
+constraint-dependencies = [
+  "coverage>=7.16",
+  "fastapi>=0.141.1,<1",
+  "pydantic>=2.13,<3",
+  "pydantic-settings>=2.15,<3",
+  "pytest>=9.1",
+  "pytest-asyncio>=1.4",
+  "uvicorn>=0.52.4,<1",
+]
 
 [tool.uv.workspace]
-members = ["packages/*"]
+members = ["apps/*", "pkgs/*"]
 
 [tool.uv.sources]
+api-server = { workspace = true }
+auth-service = { workspace = true }
+user-service = { workspace = true }
+config = { workspace = true }
+contract = { workspace = true }
 core = { workspace = true }
+error = { workspace = true }
+model = { workspace = true }
 
 [tool.pyright]
-include = ["packages"]
+include = ["apps", "pkgs"]
 exclude = ["**/.*", "**/__pycache__"]
 pythonVersion = "3.14"
 typeCheckingMode = "standard"
@@ -28,8 +46,8 @@ typeCheckingMode = "standard"
 [tool.ruff]
 include = [
   "pyproject.toml",
-  "packages/*/pyproject.toml",
-  "packages/*/{src,tests}/**/*.{py,pyi}",
+  "{apps,pkgs}/*/pyproject.toml",
+  "{apps,pkgs}/*/{src,tests}/**/*.{py,pyi}",
 ]
 extend-exclude = ["**/.*"]
 target-version = "py314"
@@ -37,88 +55,71 @@ line-length = 120
 
 [tool.ruff.lint]
 select = [
-  "ERA",   # eradicate
   "FAST",  # fastapi
   "ANN",   # flake8-annotations
   "ASYNC", # flake8-async
   "S",     # flake8-bandit (security)
   "B",     # flake8-bugbear
-  "A",     # flake8-builtins
   "C4",    # flake8-comprehensions
   "DTZ",   # flake8-datetimez
-  "T10",   # flake8-debugger
-  "EM",    # flake8-errmsg
-  "EXE",   # flake8-executable
-  "ISC",   # flake8-implicit-str-concat
-  "LOG",   # flake8-logging
-  "G",     # flake8-logging-format
   "PIE",   # flake8-pie
-  "T20",   # flake8-print
-  "PYI",   # flake8-pyi
   "PT",    # flake8-pytest-style
-  "Q",     # flake8-quotes
-  "RSE",   # flake8-raise
   "RET",   # flake8-return
-  "SLF",   # flake8-self
   "SIM",   # flake8-simplify
-  "SLOT",  # flake8-slots
-  "TID",   # flake8-tidy-imports
-  "TD",    # flake8-todos
-  "TC",    # flake8-type-checking
-  "ARG",   # flake8-unused-arguments
   "PTH",   # flake8-use-pathlib
-  "FLY",   # flynt
   "I",     # isort
-  "NPY",   # numpy-specific rules
-  "PD",    # pandas-vet
-  "N",     # pep8-naming
   "PERF",  # perflint
   "E",     # pycodestyle errors
   "W",     # pycodestyle warnings
   "F",     # pyflakes
-  "PGH",   # pygrep-hooks
-  "PL",    # pylint
   "UP",    # pyupgrade
-  "FURB",  # refurb
-  "RUF",   # ruff-specifc rules
-  "TRY",   # tryceratops
+  "RUF",   # ruff-specific rules
 ]
-
 ignore = [
   "ANN401", # any-type
   "B008",   # function-call-in-default-argument
-  "EM101",  # raw-string-in-exception
-  "EM102",  # f-string-in-exception
-  "TD002",  # missing-todo-author
-  "TD003",  # missing-todo-link
-  "ARG001", # unused-function-argument
-  "ARG002", # unused-method-argument
-  "ARG004", # unused-static-method-argument
   "E501",   # line-too-long
-  "TRY003", # raise-vanilla-args
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/**/*.py" = [
+  "S101", # assert
 ]
 
 [tool.pytest.ini_options]
 testpaths = [
-  "packages/core/tests",
-  "packages/api-server/tests",
-  "packages/auth-service/tests",
-  "packages/user-service/tests",
+  "apps/api-server/tests",
+  "apps/auth-service/tests",
+  "apps/user-service/tests",
+  "pkgs/config/tests",
+  "pkgs/contract/tests",
+  "pkgs/core/tests",
+  "pkgs/error/tests",
+  "pkgs/model/tests",
 ]
 addopts = "-ra -q"
+asyncio_mode = "auto"
 
 [tool.coverage.run]
 source = [
-  "packages/core/src",
-  "packages/api-server/src",
-  "packages/auth-service/src",
-  "packages/user-service/src",
+  "apps/api-server/src",
+  "apps/auth-service/src",
+  "apps/user-service/src",
+  "pkgs/config/src",
+  "pkgs/contract/src",
+  "pkgs/core/src",
+  "pkgs/error/src",
+  "pkgs/model/src",
 ]
 branch = true
+relative_files = true
 
 [tool.coverage.report]
 omit = ["**/.*"]
 show_missing = true
+skip_empty = true
+precision = 2
 
 [tool.coverage.html]
 show_contexts = true
+skip_empty = true

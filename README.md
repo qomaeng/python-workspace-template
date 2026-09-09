@@ -2,40 +2,88 @@
 
 ## Commands
 
-- Install (package, dependencies)
+### Install
+
+Install all workspace packages and dependencies:
 
 ```bash
-$ uv sync --all-packages [--dev] [--refresh]
+uv sync --all-packages [--dev] [-U] [--refresh]
 ```
 
-- Start
+### Add Dependencies
+
+Add a dependency to a workspace package:
 
 ```bash
-$ uv run --package <PACKAGE> <COMMAND>
+uv add --package <PACKAGE> <DEPENDENCY>
 ```
 
-- lint/fix/format
+Add a development dependency:
 
 ```bash
-# Lint check
-$ uv run ruff check <PACKAGE_DIR>
-$ uv run ruff format --check <PACKAGE_DIR>
+uv add --package <PACKAGE> --dev <DEPENDENCY>
+```
 
-# Lint fix
-$ uv run ruff check -fix <PACKAGE_DIR>
+Examples:
+
+```bash
+uv add --package api-server fastapi
+uv add --package api-server --dev pytest
+```
+
+After adding a dependency, manage its version constraint in the root `pyproject.toml`:
+
+```toml
+[tool.uv]
+constraint-dependencies = [
+  "fastapi>=0.141.1,<1",
+]
+```
+
+Workspace packages should generally declare the dependency without duplicating version constraints. Keep shared version policy in the root `constraint-dependencies`.
+
+### Start
+
+Run a command for a workspace package:
+
+```bash
+uv run --package <PACKAGE> <COMMAND>
+```
+
+### Lint / Fix / Format
+
+```bash
+# Lint
+uv run ruff check
+uv run ruff format --check
+
+# Fix
+uv run ruff check --fix
 
 # Format
-$ uv run ruff format <PACKAGE_DIR>
+uv run ruff format
+
+# Type check
+uv run basedpyright
 ```
 
-- test/coverage
+### Test / Coverage
 
 ```bash
-$ uv run pytest                     # Test (only)
-$ uv run coverage run -m pytest     # Test & Coverage
-$ uv run coverage html              # Report coverage (HTML)
+# Test
+uv run pytest
 
-$ xdg-open htmlcov/index.html       # Linux
-$ open htmlcov/index.html           # macOS
-$ Start-Process htmlcov/index.html  # PowerShell
+# Test with coverage
+uv run coverage run -m pytest
+
+# Generate HTML coverage report
+uv run coverage html
+```
+
+Open the coverage report:
+
+```bash
+xdg-open htmlcov/index.html       # Linux
+open htmlcov/index.html           # macOS
+Start-Process htmlcov/index.html  # PowerShell
 ```

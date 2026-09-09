@@ -1,0 +1,13 @@
+[project]
+name = "config"
+version = "0.0.1"
+readme = "README.md"
+description = "Config"
+requires-python = ">=3.14"
+dependencies = [
+  "pydantic-settings",
+]
+
+[build-system]
+requires = ["uv_build"]
+build-backend = "uv_build"

@@ -1,0 +1,11 @@
+[project]
+name = "core"
+version = "0.0.1"
+readme = "README.md"
+description = "Core library"
+requires-python = ">=3.14"
+dependencies = []
+
+[build-system]
+requires = ["uv_build"]
+build-backend = "uv_build"

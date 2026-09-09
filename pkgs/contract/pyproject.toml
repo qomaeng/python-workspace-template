@@ -1,0 +1,13 @@
+[project]
+name = "contract"
+version = "0.0.1"
+readme = "README.md"
+description = "Contract"
+requires-python = ">=3.14"
+dependencies = [
+  "pydantic",
+]
+
+[build-system]
+requires = ["uv_build"]
+build-backend = "uv_build"

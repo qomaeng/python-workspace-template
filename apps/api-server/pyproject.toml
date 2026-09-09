@@ -1,0 +1,21 @@
+[project]
+name = "api-server"
+version = "0.0.1"
+readme = "README.md"
+description = "API server"
+requires-python = ">=3.14"
+dependencies = [
+  "config",
+  "contract",
+  "core",
+  "error",
+  "fastapi",
+  "model",
+  "pydantic",
+  "pydantic-settings",
+  "uvicorn[standard]",
+]
+
+[build-system]
+requires = ["uv_build"]
+build-backend = "uv_build"
